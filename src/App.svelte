@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Header from "./components/Header.svelte";
+
 	let todoList = [{
 		id: 1, title: "braaap"
 	}]
@@ -9,12 +11,19 @@
 		titleInput = e.target.value;
 	}
 
+	function handleAddItem() {
+		todoList.push({id: 5, title: titleInput});
+		todoList = todoList;
+	}
+
 </script>
+
+<Header />
 
 <main>
 	<h1>Todo list </h1>
 	<ul>
-		{#each todoList as item (item.id)}
+		{#each todoList as item (item)}
 			<li>
 				<p>ID: {item.id}</p>
 				<p>TITLE: {item.title}</p>
@@ -22,7 +31,7 @@
 		{/each}
 	</ul>
 
-	<button>
+	<button on:click={handleAddItem}>
 		Add item
 	</button>
 
